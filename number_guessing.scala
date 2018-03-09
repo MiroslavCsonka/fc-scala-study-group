@@ -7,17 +7,18 @@ def generateValue: Int = (Math.random() * 10).round.toInt
 def readNumber: Try[Int] = Try(readLine().toInt)
 
 def readGameType: Int = {
+  def isValidGameType(gameType: Int): Boolean = List(1, 2, 3).contains(gameType)
+
   var gameType = 0
-  while (!List(1, 2, 3).contains(gameType) ) {
+  while (!isValidGameType(gameType) ) {
     gameType = readNumber.get
+
+    if (!isValidGameType(gameType)){
+      println(s"Game type '${gameType}' is not supported! Try again :)")
+    }
+
   }
   gameType
-//
-//    // TODO: get rid of .get
-//    if (List(1, 2, 3).contains(gameType.get)) {
-//      error(gameType.get)
-//    }
-//  }
 }
 
 def promptForValue = println("Guess a number: ")
